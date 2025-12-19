@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.build.json",
+  "moduleResolution": "bundler", // 关键！支持 modern 模块解析
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler", // 关键！支持 modern 模块解析
+    "allowImportingTsExtensions": true,
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@lx/ui/*": ["packages/ui/src/*"],
+      "@lx/utils/*": ["packages/utils/src/*"]
+    },
+    "noEmit": true
+  }
+}

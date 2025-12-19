@@ -1,0 +1,6 @@
+/* packages/ui/tailwind.css */
+/* 使用这个代码激活vscode的Tailwind CSS插件功能，否则不会有tailwind css提示 */
+@import 'tailwindcss';
+
+/* 显式告诉插件：源码在这里 */
+/* @source "./src"; */

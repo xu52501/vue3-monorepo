@@ -1,0 +1,11 @@
+/* 新版本 */
+/* @import 'tailwindcss'; */
+
+/* 可选：自定义变量 */
+:root {
+    --background: oklch(1 0 0);
+}
+
+.dark {
+    --background: oklch(0.145 0 0);
+}

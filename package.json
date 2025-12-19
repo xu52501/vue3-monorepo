@@ -1,0 +1,39 @@
+{
+    "name": "monorepo",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "private": true,
+    "workspaces": [
+        "apps/*",
+        "packages/*"
+    ],
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "turbo dev",
+        "build": "turbo run build --no-daemon"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "packageManager": "pnpm@10.12.1",
+    "dependencies": {
+        "@lx/ui": "workspace:*",
+        "@lx/utils": "workspace:*",
+        "turbo": "^2.6.3",
+        "types": "^0.1.1",
+        "vue": "^3.5.16"
+    },
+    "devDependencies": {
+        "@eslint/css": "^0.14.1",
+        "@eslint/js": "^9.39.2",
+        "@eslint/json": "^0.14.0",
+        "@types/node": "^25.0.3",
+        "eslint": "^9.39.2",
+        "eslint-plugin-vue": "^10.6.2",
+        "globals": "^16.5.0",
+        "jiti": "^2.6.1",
+        "prettier": "^3.7.4",
+        "typescript-eslint": "^8.50.0"
+    }
+}

@@ -1,0 +1,16 @@
+@import 'tailwindcss';
+/* 添加tailwind的扫描范围，packages/ui/src下的类名也需要被扫描到 */
+@source "../../../../packages/ui/src";
+
+:root {
+    --title-color: #2c314b;
+    --main-color: #5189ff;
+    --title-size: 16px;
+    --text-size: 14px;
+    --tips-color: #a4a4a4;
+    --error-color: #ff4d4f;
+    --border-color: #eee;
+}
+@utility text-777 {
+    color: #777;
+}
