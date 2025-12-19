@@ -1,3 +1,5 @@
+# 任何满足 packages/* 或 apps/* 的目录，只要包含 package.json，就被视为 workspace 包
+# 关键是 package.json 中的 name,路径和name会生成映射关系，install的时候会创建软链接
 packages:
-  - 'packages/*'
-  - 'apps/*'
+    - 'packages/*'
+    - 'apps/*'
