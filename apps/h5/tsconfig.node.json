@@ -20,5 +20,12 @@
         "noFallthroughCasesInSwitch": true,
         "noUncheckedSideEffectImports": true
     },
-    "include": ["vite.config.*", "vitest.config.*", "cypress.config.*", "playwright.config.*", "env.d.ts"]
+    "include": [
+        "vite.config.*",
+        "vitest.config.*",
+        "cypress.config.*",
+        "playwright.config.*",
+        "env.d.ts",
+        "build/**/*.ts"
+    ]
 }

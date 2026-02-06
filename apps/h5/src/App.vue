@@ -6,8 +6,8 @@ const a = ref('asd');
 
 <template>
     <div>
-        <m-button>{{ a }}</m-button>
-        <m-text></m-text>
+        <my-button type="primary" shape="round">{{ a }}</my-button>
+        <my-text text="你好"></my-text>
         <div class="text-4xl text-red-500">qqer</div>
     </div>
 </template>

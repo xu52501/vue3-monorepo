@@ -12,5 +12,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     HelloWorld: typeof import('./../components/HelloWorld.vue')['default']
+    MyButton: typeof import('@lx/ui')['MyButton']
+    MyText: typeof import('@lx/ui')['MyText']
   }
 }
