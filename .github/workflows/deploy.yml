@@ -32,7 +32,7 @@ jobs:
             - name: Setup Node.js
               uses: actions/setup-node@v4
               with:
-                  node-version: '22.14.0'
+                  node-version: '24.11.0'
 
             # 3. 安装 pnpm 包管理器
             - name: Install pnpm
