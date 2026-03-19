@@ -4,11 +4,9 @@
  * Copyright © YourCompanyName All rights reserved
  */
 
-import { ComponentResolver } from 'unplugin-vue-components/types';
-
-export const uiResolver: ComponentResolver = {
+export const uiResolver = {
     type: 'component',
-    resolve: (name: string) => {
+    resolve: (name) => {
         if (name.toLocaleLowerCase().startsWith('my')) {
             return {
                 name,

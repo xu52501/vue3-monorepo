@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import tailwindcss from '@tailwindcss/vite'; // <--- 引入插件
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
-import { uiResolver } from './build/resolver';
+import { uiResolver } from '@lx/ui/resolver';
 
 // https://vite.dev/config/
 export default defineConfig({
