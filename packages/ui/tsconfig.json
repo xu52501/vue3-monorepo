@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "declaration": false,
+    "outDir": "./",
+    "strict": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": "./", // 基础路径，解决相对路径解析问题
+    "paths": {
+      "*": ["node_modules/*"]
+    }
+  },
+  "include": [
+    "index.ts", 
+    "shims-vue.d.ts", // 新增：包含 Vue 类型声明
+    "src/**/*" // 新增：包含 src 目录下的所有文件（如果有）
+  ],
+  "exclude": ["node_modules", "**/*.js"]
+}

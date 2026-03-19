@@ -8,7 +8,7 @@
   "exports": {
     ".": {
       "types": "./index.ts",
-      "default": "./index.ts"
+      "default": "./index.js"
     },
     "./resolver": {
       "types": "./type.d.ts",
@@ -16,6 +16,8 @@
     }
   },
   "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
