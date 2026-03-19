@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { Button, ButtonProps } from 'ant-design-vue';
+import { Button, type ButtonProps } from 'ant-design-vue';
 
 defineProps<ButtonProps>();
 </script>

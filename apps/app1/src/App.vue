@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue';
-import { myButton, Tooltip } from '@lx/ui';
+import { MyButton, Tooltip } from '@lx/ui';
 </script>
 
 <template>
     <div>
-        <myButton>test1123</myButton>
+        <MyButton>test1123</MyButton>
         <Tooltip>
             asdasd
             <template #title>
