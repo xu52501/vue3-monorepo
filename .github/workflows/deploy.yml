@@ -3,81 +3,81 @@ name: Deploy to GitHub Pages
 
 # 触发条件：推送到 main 分支时触发，支持手动触发
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
 
 # 权限配置
 permissions:
-  contents: read    # 读取仓库内容
-  pages: write      # 写入 GitHub Pages
-  id-token: write   # 用于 OIDC 认证
+    contents: read # 读取仓库内容
+    pages: write # 写入 GitHub Pages
+    id-token: write # 用于 OIDC 认证
 
 # 并发控制：同一时间只允许一个部署任务运行
 concurrency:
-  group: pages
-  cancel-in-progress: false
+    group: pages
+    cancel-in-progress: false
 
 jobs:
-  # 构建 job
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      # 1. 检出代码
-      - name: Checkout
-        uses: actions/checkout@v4
+    # 构建 job
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            # 1. 检出代码
+            - name: Checkout
+              uses: actions/checkout@v4
 
-      # 2. 设置 Node.js 环境
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22.14.0"
+            # 2. 设置 Node.js 环境
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '22.14.0'
 
-      # 3. 安装 pnpm 包管理器
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
+            # 3. 安装 pnpm 包管理器
+            - name: Install pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 10.12.1
 
-      # 4. 获取 pnpm store 目录路径，用于缓存
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+            # 4. 获取 pnpm store 目录路径，用于缓存
+            - name: Get pnpm store directory
+              id: pnpm-cache
+              run: |
+                  echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
 
-      # 5. 配置 pnpm 缓存
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+            # 5. 配置 pnpm 缓存
+            - name: Setup pnpm cache
+              uses: actions/cache@v4
+              with:
+                  path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
 
-      # 6. 安装项目依赖
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+            # 6. 安装项目依赖
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
 
-      # 7. 构建 h5 项目
-      - name: Build h5 project
-        run: pnpm --filter h5 build
+            # 7. 构建 h5 项目
+            - name: Build h5 project
+              run: pnpm --filter h5 build
 
-      # 8. 上传构建产物（用于 Pages 部署）
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./apps/h5/dist
+            # 8. 上传构建产物（用于 Pages 部署）
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  path: ./apps/h5/dist
 
-  # 部署 job：依赖于 build job
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      # 9. 部署到 GitHub Pages
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+    # 部署 job：依赖于 build job
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        steps:
+            # 9. 部署到 GitHub Pages
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4
