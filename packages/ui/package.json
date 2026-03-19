@@ -3,17 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "./index.ts",
-  "types": "./type.d.ts",
-  "type": "module",
-  "exports": {
-    ".": {
-      "types": "./type.d.ts"
-    },
-    "./resolver": {
-      "types": "./type.d.ts",
-      "default": "./resolver.js"
-    }
-  },
+
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

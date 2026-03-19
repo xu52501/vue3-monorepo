@@ -19,3 +19,12 @@ pnpm run dev 启动所有项目
 pnpm run build
 批量构建会有问题，进入子项目进行构建
 ```
+
+  <!-- "types": "./type.d.ts",
+  "type": "module",
+  "exports": {
+    "./resolver": {
+      "types": "./type.d.ts",
+      "default": "./resolver.js"
+    }
+  }, -->
