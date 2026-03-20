@@ -8,7 +8,7 @@ const a = ref('test');
     <div class="text-center">
         <my-button type="primary" shape="round">{{ a }}</my-button>
         <my-text text="文本测试"></my-text>
-        <div class="text-4xl text-red-500">github actions 测试</div>
+        <div class="text-4xl text-red-500">github actions 测试1</div>
     </div>
 </template>
 

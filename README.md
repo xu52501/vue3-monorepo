@@ -15,16 +15,21 @@ pnpm install
 # 运行
 pnpm run dev 启动所有项目
 
-# 构建
+# 全量构建或使用turbo
 pnpm run build
-批量构建会有问题，进入子项目进行构建
-```
 
-  <!-- "types": "./type.d.ts",
-  "type": "module",
-  "exports": {
-    "./resolver": {
-      "types": "./type.d.ts",
-      "default": "./resolver.js"
-    }
-  }, -->
+# 构建单个项目
+pnpm --filter <project-name> run build
+
+# 构建ui
+
+## 开发（会自动观察ui代码变化生成index.js）
+pnpm --filter @lx/ui run dev
+
+## 生产
+pnpm run build:ui
+
+# turbo说明
+- turbo dev会先执行ui dev启动对ui下文件更新的监听，变化自动生成新的indexjs，再启动子项目
+- turbo build会先执行ui build生成index.js，再全量build
+```

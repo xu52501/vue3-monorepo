@@ -8,7 +8,7 @@ export { MyButton, MyText };
 
 export const lxUi = {
     install(app: App) {
-        // 这里可以全局挂载
+        // 这里可以全局挂载6354
         app.component('my-button', MyButton);
         app.component('my-text', MyText);
     },

@@ -1,17 +1,42 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
+  "globalDependencies": [
+    "**/.env.*local"
+  ],
   "tasks": {
-    "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    "build:ui": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "packages/ui/dist/index.js"
+      ],
+      "inputs": [
+        "packages/ui/src/**/*",
+        "packages/ui/package.json",
+        "packages/ui/vite.config.ts"
+      ],
+      "cache": true
     },
-    "lint": {
-      "dependsOn": ["^lint"]
+    "build": {
+      "dependsOn": [
+        "build:ui",
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        "lib/**"
+      ],
+      "inputs": [
+        "src/**/*",
+        "package.json"
+      ]
     },
     "dev": {
-      "cache": false,
-      "persistent": true
+      "dependsOn": [
+        "build:ui"
+      ],
+      "cache": false
     }
   }
 }

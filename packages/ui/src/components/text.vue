@@ -14,6 +14,8 @@
 defineProps<{
     text: string;
 }>();
+
+console.log('自动更新触发');
 </script>
 
 <style lang="scss" scoped>
