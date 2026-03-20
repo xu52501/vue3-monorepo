@@ -9,7 +9,7 @@ import { uiResolver } from '@lx/ui/resolver';
 export default defineConfig(({ mode }: ConfigEnv) => {
     const env = loadEnv(mode, process.cwd());
     return {
-        base: env.VITE_BASE,
+        base: env.VITE_BASE || '/',
         plugins: [
             vue(),
             tailwindcss(),

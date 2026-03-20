@@ -63,7 +63,7 @@ jobs:
 
             # 7. 构建 h5 项目
             - name: Build h5 project
-              run: pnpm --filter h5 build
+              run: pnpm --filter h5 build:gh-pages
 
             # 8. 上传构建产物（用于 Pages 部署）
             - name: Upload artifact
