@@ -57,6 +57,8 @@ jobs:
 
             # 6. 安装项目依赖
             - name: Install dependencies
+              env:
+                  VITE_BASE: /vue3-monorepo/
               run: pnpm install --frozen-lockfile
 
             # 7. 构建 h5 项目
