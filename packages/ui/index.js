@@ -2,6 +2,7 @@ import MyButton from './src/components/button.vue';
 import MyText from './src/components/text.vue';
 import './src/style/index.css';
 export * from 'ant-design-vue';
+export * from '@ant-design/icons-vue';
 export { MyButton, MyText };
 export const lxUi = {
     install(app) {

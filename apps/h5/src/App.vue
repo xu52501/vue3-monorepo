@@ -1,31 +1,43 @@
 <script setup lang="ts">
-import { log } from '@lx/utils';
-log('h5 app');
-const a = ref('test');
+// import Navigation from './components/Navigation.vue';
+// import Hero from './components/Hero.vue';
+// import Skills from './components/Skills.vue';
+// import Articles from './components/Articles.vue';
+// import Footer from './components/Footer.vue';
 </script>
 
 <template>
-    <div class="text-center">
-        <my-button type="primary" shape="round">{{ a }}</my-button>
-        <my-text text="文本测试"></my-text>
-        <div class="text-4xl text-red-500">github actions 测试1</div>
+    <div id="app" class="bg-white">
+        <!-- Navigation -->
+        <Navigation />
+
+        <!-- Main Content -->
+        <main class="pt-16">
+            <!-- Hero Section -->
+            <div id="hero">
+                <Hero />
+            </div>
+
+            <!-- Skills Section -->
+            <div id="skills">
+                <Skills />
+            </div>
+
+            <!-- Articles Section -->
+            <div id="articles">
+                <Articles />
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <div id="contact">
+            <Footer />
+        </div>
     </div>
 </template>
 
 <style scoped lang="scss">
-.logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-    a {
-        color: red;
-    }
-}
-.logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-    filter: drop-shadow(0 0 2em #42b883aa);
+#app {
+    min-height: 100vh;
 }
 </style>

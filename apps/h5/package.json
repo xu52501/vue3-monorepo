@@ -12,6 +12,8 @@
     "dependencies": {
         "@lx/ui": "workspace:^",
         "@lx/utils": "workspace:^",
+        "axios": "^1.13.6",
+        "pinia": "^3.0.4",
         "vue": "^3.5.13"
     },
     "devDependencies": {

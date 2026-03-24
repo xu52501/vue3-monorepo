@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
+import { lxUi } from '@lx/ui';
 import App from './App.vue';
-// import { lxUi } from '@lx/ui';
 import './style/index.css';
 
-createApp(App).mount('#app');
+const app = createApp(App);
+app.use(lxUi).mount('#app');

@@ -11,8 +11,11 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Articles: typeof import('./../components/Articles.vue')['default']
+    Footer: typeof import('./../components/Footer.vue')['default']
     HelloWorld: typeof import('./../components/HelloWorld.vue')['default']
-    MyButton: typeof import('@lx/ui')['MyButton']
-    MyText: typeof import('@lx/ui')['MyText']
+    Hero: typeof import('./../components/Hero.vue')['default']
+    Navigation: typeof import('./../components/Navigation.vue')['default']
+    Skills: typeof import('./../components/Skills.vue')['default']
   }
 }

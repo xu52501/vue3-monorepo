@@ -2,6 +2,9 @@
 /* 添加tailwind的扫描范围，packages/ui/src下的类名也需要被扫描到 */
 @source "../../../../packages/ui/src";
 
+/* 导入 Ant Design Vue 样式重置 */
+@import './antd-reset.scss';
+
 :root {
     --title-color: #2c314b;
     --main-color: #5189ff;
@@ -11,6 +14,73 @@
     --error-color: #ff4d4f;
     --border-color: #eee;
 }
+
 @utility text-777 {
     color: #777;
+}
+
+/* Custom Tailwind utilities */
+@layer components {
+    .text-main-color {
+        @apply text-[#5189ff];
+    }
+
+    .text-title-color {
+        @apply text-[#2c314b];
+    }
+
+    .text-tips-color {
+        @apply text-[#a4a4a4];
+    }
+
+    .bg-main-color {
+        @apply bg-[#5189ff];
+    }
+
+    .border-main-color {
+        @apply border-[#5189ff];
+    }
+
+    .border-border-color {
+        @apply border-[#eee];
+    }
+
+    .text-error-color {
+        @apply text-[#ff4d4f];
+    }
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Base styles */
+body {
+    font-family:
+        -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+        'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Container utilities */
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
 }
