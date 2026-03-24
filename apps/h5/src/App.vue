@@ -1,9 +1,32 @@
 <script setup lang="ts">
-// import Navigation from './components/Navigation.vue';
-// import Hero from './components/Hero.vue';
-// import Skills from './components/Skills.vue';
-// import Articles from './components/Articles.vue';
-// import Footer from './components/Footer.vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+
+// 当前激活的页面部分
+const currentSection = ref('hero');
+
+// 监听 hash 变化
+const handleHashChange = () => {
+    const hash = window.location.hash.slice(1) || 'hero';
+    currentSection.value = hash;
+
+    // 平滑滚动到对应元素
+    const element = document.getElementById(hash);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+    }
+};
+
+onMounted(() => {
+    // 初始化时检查 hash
+    handleHashChange();
+
+    // 监听 hash 变化
+    window.addEventListener('hashchange', handleHashChange);
+});
+
+onBeforeUnmount(() => {
+    window.removeEventListener('hashchange', handleHashChange);
+});
 </script>
 
 <template>

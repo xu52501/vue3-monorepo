@@ -29,21 +29,15 @@ export const useUserStore = defineStore('user', () => {
     };
 
     const addUser = (user: User) => {
-        userList.value.push(user);
+        userList.value = [...userList.value, user];
     };
 
     const updateUser = (id: string, updates: Partial<User>) => {
-        const index = userList.value.findIndex((user) => user.id === id);
-        if (index !== -1) {
-            userList.value[index] = { ...userList.value[index], ...updates };
-        }
+        userList.value = userList.value.map((user) => (user.id === id ? { ...user, ...updates } : user));
     };
 
     const removeUser = (id: string) => {
-        const index = userList.value.findIndex((user) => user.id === id);
-        if (index !== -1) {
-            userList.value.splice(index, 1);
-        }
+        userList.value = userList.value.filter((user) => user.id !== id);
     };
 
     const setPermissions = (perms: string[]) => {
@@ -57,12 +51,22 @@ export const useUserStore = defineStore('user', () => {
     // 初始化
     const initFromStorage = () => {
         const stored = localStorage.getItem('currentUser');
-        if (stored) {
-            try {
-                currentUser.value = JSON.parse(stored);
-            } catch (error) {
-                console.error('Failed to parse stored user:', error);
+        if (!stored) return;
+
+        try {
+            const parsed = JSON.parse(stored);
+
+            // 验证数据结构
+            if (parsed && typeof parsed === 'object' && 'id' in parsed && 'role' in parsed) {
+                currentUser.value = parsed;
+            } else {
+                console.warn('Invalid stored user data, clearing');
+                localStorage.removeItem('currentUser');
             }
+        } catch (error) {
+            console.error('Failed to parse stored user, clearing data:', error);
+            // 清理损坏的数据
+            localStorage.removeItem('currentUser');
         }
     };
 

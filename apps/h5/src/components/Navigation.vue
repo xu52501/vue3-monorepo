@@ -8,17 +8,24 @@ const toggleMobileMenu = () => {
     mobileMenuOpen.value = !mobileMenuOpen.value;
 };
 
-const navItems = [
+interface NavItem {
+    key: 'hero' | 'skills' | 'articles' | 'contact';
+    label: string;
+    href: string;
+}
+
+const navItems: NavItem[] = [
     { key: 'hero', label: '首页', href: '#hero' },
     { key: 'skills', label: '技能', href: '#skills' },
     { key: 'articles', label: '文章', href: '#articles' },
     { key: 'contact', label: '联系', href: '#contact' },
 ];
 
-const handleMenuClick = (item: any) => {
-    const href = navItems.find((nav) => nav.key === item.key)?.href;
-    if (href) {
-        window.location.hash = href;
+const handleMenuClick = (info: any) => {
+    const key = String(info.key);
+    const item = navItems.find((nav) => nav.key === key);
+    if (item?.href) {
+        window.location.hash = item.href;
         mobileMenuOpen.value = false;
     }
 };

@@ -1,72 +1,13 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import { Card, Progress, Row, Col, Tag } from '@lx/ui';
+import { useSkillsStore } from '../stores/skills';
 
-interface Skill {
-    name: string;
-    description: string;
-    icon: string;
-    proficiency: number;
-}
+const skillsStore = useSkillsStore();
 
-const frontendSkills: Skill[] = [
-    {
-        name: 'Vue.js',
-        description: '熟练掌握 Vue 3 及其生态',
-        icon: '🖖',
-        proficiency: 95,
-    },
-    {
-        name: 'React',
-        description: '深入理解 React Hooks 和状态管理',
-        icon: '⚛️',
-        proficiency: 85,
-    },
-    {
-        name: 'TypeScript',
-        description: '精通 TypeScript 类型系统',
-        icon: '📘',
-        proficiency: 90,
-    },
-    {
-        name: 'Tailwind CSS',
-        description: '快速构建响应式 UI',
-        icon: '🎨',
-        proficiency: 90,
-    },
-    {
-        name: 'Vite',
-        description: '现代化的前端构建工具',
-        icon: '⚡',
-        proficiency: 85,
-    },
-    {
-        name: 'WebGL',
-        description: '3D 图形编程基础',
-        icon: '🌐',
-        proficiency: 75,
-    },
-];
-
-const otherSkills: Skill[] = [
-    {
-        name: '响应式设计',
-        description: 'Mobile First 设计理念',
-        icon: '📱',
-        proficiency: 95,
-    },
-    {
-        name: '性能优化',
-        description: '代码分割、缓存、懒加载',
-        icon: '⚙️',
-        proficiency: 85,
-    },
-    {
-        name: '测试驱动',
-        description: '单元测试、集成测试',
-        icon: '✅',
-        proficiency: 80,
-    },
-];
+onMounted(() => {
+    skillsStore.fetchSkills();
+});
 </script>
 
 <template>
@@ -82,7 +23,7 @@ const otherSkills: Skill[] = [
             <div class="mb-16">
                 <h3 class="text-2xl font-bold text-title-color mb-8">前端技术</h3>
                 <Row :gutter="[16, 16]">
-                    <Col v-for="skill in frontendSkills" :key="skill.name" :xs="24" :md="12" :lg="8">
+                    <Col v-for="skill in skillsStore.frontendSkills" :key="skill.name" :xs="24" :md="12" :lg="8">
                         <Card hoverable class="h-full" :bodyStyle="{ padding: '24px' }">
                             <div class="text-center">
                                 <div class="text-4xl mb-4">{{ skill.icon }}</div>
@@ -107,7 +48,7 @@ const otherSkills: Skill[] = [
             <div>
                 <h3 class="text-2xl font-bold text-title-color mb-8">其他技能</h3>
                 <Row :gutter="[16, 16]">
-                    <Col v-for="skill in otherSkills" :key="skill.name" :xs="24" :md="8">
+                    <Col v-for="skill in skillsStore.otherSkills" :key="skill.name" :xs="24" :md="8">
                         <Card hoverable class="h-full" :bodyStyle="{ padding: '24px' }">
                             <div class="text-center">
                                 <div class="text-4xl mb-4">{{ skill.icon }}</div>

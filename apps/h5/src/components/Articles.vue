@@ -1,89 +1,21 @@
 <script setup lang="ts">
-import { Card, Tag, Button, Row, Col, ReadOutlined } from '@lx/ui';
-import { h } from 'vue';
+import { onMounted, h } from 'vue';
+import { Card, Tag, Button, Row, Col, ReadOutlined, Skeleton } from '@lx/ui';
+import { useArticlesStore } from '../stores/articles';
 
-interface Article {
-    id: number;
-    title: string;
-    description: string;
-    tags: string[];
-    date: string;
-    readTime: string;
-    icon: string;
-    link?: string;
-}
+const articlesStore = useArticlesStore();
 
-const articles: Article[] = [
-    {
-        id: 1,
-        title: 'Vue 3 Composition API 深度解析',
-        description: '详细讲解 Vue 3 Composition API 的设计理念、核心概念和实际应用场景',
-        tags: ['Vue.js', 'JavaScript'],
-        date: '2024-03-15',
-        readTime: '12 分钟',
-        icon: '🖖',
-        link: '#',
-    },
-    {
-        id: 2,
-        title: 'React Hooks 最佳实践',
-        description: '深入浅出地讲解 React Hooks 的使用要点，避免常见的坑',
-        tags: ['React', 'Hooks'],
-        date: '2024-03-10',
-        readTime: '15 分钟',
-        icon: '⚛️',
-        link: '#',
-    },
-    {
-        id: 3,
-        title: 'TypeScript 类型系统完全指南',
-        description: '从基础到进阶，全面覆盖 TypeScript 的类型系统知识',
-        tags: ['TypeScript', '类型系统'],
-        date: '2024-03-05',
-        readTime: '20 分钟',
-        icon: '📘',
-        link: '#',
-    },
-    {
-        id: 4,
-        title: '前端性能优化的 10 个技巧',
-        description: '分享实战中使用过的数十个性能优化方案，包含案例和数据对比',
-        tags: ['性能优化', '最佳实践'],
-        date: '2024-02-28',
-        readTime: '18 分钟',
-        icon: '⚡',
-        link: '#',
-    },
-    {
-        id: 5,
-        title: 'Webpack vs Vite：现代构建工具对比',
-        description: '对比两种主流构建工具的优缺点，帮助你选择合适的方案',
-        tags: ['Webpack', 'Vite', '工程化'],
-        date: '2024-02-20',
-        readTime: '14 分钟',
-        icon: '🔧',
-        link: '#',
-    },
-    {
-        id: 6,
-        title: '手写实现 Vue 响应式系统',
-        description: '从零开始实现 Vue 的响应式系统，深入理解其原理',
-        tags: ['Vue.js', '深度解析'],
-        date: '2024-02-15',
-        readTime: '25 分钟',
-        icon: '🎯',
-        link: '#',
-    },
-];
+onMounted(() => {
+    articlesStore.fetchArticles();
+});
 
 const getTagColor = (index: number) => {
     const colors = ['blue', 'purple', 'pink', 'green'];
     return colors[index % colors.length];
 };
 
-const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString('zh-CN');
+const handleTagClick = (tag: string) => {
+    articlesStore.setSelectedTag(tag);
 };
 </script>
 
@@ -97,9 +29,25 @@ const formatDate = (dateStr: string) => {
                 <div class="w-16 h-1 bg-main-color mx-auto rounded"></div>
             </div>
 
+            <!-- Tag Filter -->
+            <div class="flex flex-wrap justify-center gap-2 mb-12">
+                <Tag
+                    v-for="tag in articlesStore.allTags"
+                    :key="tag"
+                    :checked="articlesStore.selectedTag === tag"
+                    @click="handleTagClick(tag)"
+                    class="cursor-pointer"
+                >
+                    {{ tag === 'all' ? '全部' : tag }}
+                </Tag>
+            </div>
+
+            <!-- Loading State -->
+            <Skeleton v-if="articlesStore.loading" active />
+
             <!-- Articles Grid -->
-            <Row :gutter="[16, 16]">
-                <Col v-for="article in articles" :key="article.id" :xs="24" :md="12" :lg="8">
+            <Row v-else :gutter="[16, 16]">
+                <Col v-for="article in articlesStore.filteredArticles" :key="article.id" :xs="24" :md="12" :lg="8">
                     <Card hoverable class="h-full" :bodyStyle="{ padding: '24px' }">
                         <!-- Icon Header -->
                         <div class="text-center mb-4">
@@ -134,7 +82,7 @@ const formatDate = (dateStr: string) => {
                             <div
                                 class="flex items-center justify-between text-xs text-tips-color border-t border-border-color pt-4"
                             >
-                                <span>{{ formatDate(article.date) }}</span>
+                                <span>{{ article.date }}</span>
                                 <span>{{ article.readTime }}</span>
                             </div>
                         </div>
@@ -152,11 +100,6 @@ const formatDate = (dateStr: string) => {
             <!-- View All Button -->
             <div class="text-center mt-16">
                 <Button type="primary" size="large">查看所有文章</Button>
-            </div>
-
-            <!-- AI Generated Badge -->
-            <div class="mt-8 text-center">
-                <Tag color="blue" class="text-sm">🤖 AI 生成</Tag>
             </div>
         </div>
     </section>

@@ -28,6 +28,11 @@ description: '**WORKFLOW SKILL** — Vue3 + Ant Design Vue 开发规范和最佳
     - 放置在 `src/components/` 目录下
     - 遵循 Vue3 Composition API 写法
 
+4. **新页面开发**
+    - 在router/index.ts中添加新页面路由
+    - 页面组件放在 `src/pages/` 目录下，结构为 `src/pages/PageName/index.vue`
+    - 页面内容过多进行拆分，拆分的组件放在 `src/pages/PageName/components/` 目录下,多处复用的放在`src/components/`目录下,方便后续复用
+
 #### 组件命名规范
 
 - PascalCase 命名：`UserProfile.vue`, `DataTable.vue`
@@ -69,13 +74,15 @@ src/style/
 - **Pinia 状态管理**
     - 用户信息、权限等全局复用数据放在 Pinia
     - 多次复用的业务数据也放入 Pinia
-    - 页面级数据放在组件内部 `ref` 或 `reactive`
+    - 页面级数据放在组件内部 `ref`
+
+- **响应式数据不使用reactive，一律使用ref或者shadowRef**
 
 - **响应式数据**
 
     ```typescript
     // 页面级数据
-    const formData = reactive({
+    const formData = ref({
         name: '',
         email: '',
     });
@@ -131,7 +138,7 @@ src/style/
 
 - **统一请求库**
     - 使用 axios 作为 HTTP 请求库
-    - 错误进行统一处理
+    - 错误进行统一处理,外部只判断是否成功，判断错误需要在catch中处理
 
 - **响应拦截器**
 
